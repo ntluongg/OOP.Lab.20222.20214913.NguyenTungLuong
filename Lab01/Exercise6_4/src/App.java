@@ -59,19 +59,19 @@ public class App {
                 MonthOfName = "August";
                 number_Of_DaysInMonth = 31;
                 break;
-            } else if ((month == "9") || (month == "September") || (month == "Sep") || (month == "Sep.")){
+            } else if ((month.equals("9")) || (month.equals("September")) || (month.equals("Sep")) || (month.equals("Sep."))){
                 MonthOfName = "September";
                 number_Of_DaysInMonth = 30;
                 break;
-            } else if ((month == "10") || (month == "October") || (month == "Oct") || (month == "Oct.")){
+            } else if ((month.equals("10")) || (month.equals("October")) || (month.equals("Oct")) || (month.equals("Oct."))){
                 MonthOfName = "October";
                 number_Of_DaysInMonth = 31;
                 break;
-            } else if ((month == "11") || (month == "November") || (month == "Nov") || (month == "Nov.")){
+            } else if ((month.equals("11")) || (month.equals("November")) || (month.equals("Nov")) || (month.equals("Nov."))){
                 MonthOfName = "November";
                 number_Of_DaysInMonth = 30;
                 break;
-            } else if ((month == "12") || (month == "December") || (month == "Dec") || (month == "Dec.")){
+            } else if ((month.equals("12")) || (month.equals("December")) || (month.equals("Dec")) || (month.equals("Dec."))){
                 MonthOfName = "December";
                 number_Of_DaysInMonth = 31;
                 break;
