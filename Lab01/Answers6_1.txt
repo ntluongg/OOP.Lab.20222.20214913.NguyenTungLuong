@@ -1,4 +1,11 @@
 Exercise
 6.1:
 Q1 If users choose "Cancel" it will prompt "You've chosen: No"
-Q2 Yes we can by adding null, JOptionPane.YES_NO_OPTION to showConfirmDialog
+
+Q2 
+a/
+Yes we can by changing:
+    int option = JOptionPane.showConfirmDialog(null, "Do you want to change to the first class ticket?", JOptionPane.YES_NO_OPTION);
+b/
+Object[] options = {"I do", "I don't"};
+int option = JOptionPane.showOptionDialog(frame, "Do you want to change to the first class ticket?", "Confirm message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
