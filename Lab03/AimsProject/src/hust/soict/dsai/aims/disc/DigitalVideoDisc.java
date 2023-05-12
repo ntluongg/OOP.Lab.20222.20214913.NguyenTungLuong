@@ -1,4 +1,4 @@
-package my_package;
+package hust.soict.dsai.aims.disc;
 
 public class DigitalVideoDisc {
 	public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
@@ -47,7 +47,10 @@ public class DigitalVideoDisc {
 	}
 	public float getCost() {
 		return cost;
+		
+	
 	}
+	
 	@Override
     public boolean equals(Object obj) {
 		if(obj == null) {
@@ -59,5 +62,9 @@ public class DigitalVideoDisc {
         }
         DigitalVideoDisc other = (DigitalVideoDisc) obj;
         	return (other.title == this.title)&&(other.director == this.director) ; 
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }
