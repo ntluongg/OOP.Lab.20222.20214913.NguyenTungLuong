@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author luong
- *
- */
-module AimsProject {
-}

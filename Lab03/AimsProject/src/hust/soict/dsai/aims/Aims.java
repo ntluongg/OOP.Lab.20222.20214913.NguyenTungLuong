@@ -23,11 +23,11 @@ public class Aims {
 				"Animation", "Roger Allerts", 18.99f);
 		
 		DigitalVideoDisc[] testList = new DigitalVideoDisc[10];
-		testList[1] = dvd1;
-		testList[2] = dvd2;
-		testList[3] = dvd3;
+		testList[0] = dvd1;
+		testList[1] = dvd2;
+		testList[2] = dvd3;
 		anOrder.addDigitalVideoDisc(testList);
-		anOrder.displayCart();
+		anOrder.print();
 		System.out.println("Total Cost is: ");
 		System.out.println(anOrder.totalCost()); 
 		
