@@ -1,0 +1,4 @@
+- Question: Is JAVA a Pass by Value or a Pass by Reference programming language?
+Answer: JAVA is a pass by value language
+because even though a variable might hold a reference to an object, that object reference is a value that represents the object's location in memory. 
+Object references are therefore passed by value.
