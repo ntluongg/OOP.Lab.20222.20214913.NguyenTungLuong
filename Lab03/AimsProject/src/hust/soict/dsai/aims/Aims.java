@@ -27,6 +27,7 @@ public class Aims {
 		testList[1] = dvd2;
 		testList[2] = dvd3;
 		anOrder.addDigitalVideoDisc(testList);
+		anOrder.removeDigitalVideoDisc(dvd3);
 		anOrder.print();
 		System.out.println("Total Cost is: ");
 		System.out.println(anOrder.totalCost()); 
