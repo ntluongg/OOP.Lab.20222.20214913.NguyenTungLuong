@@ -1,0 +1,54 @@
+Question: Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo()method. You can refer to the Java docs to see the information of this interface.
+Suppose we are taking this Comparable interface approach.
+- Q: What class should implement the Comparable interface?
+A:  If we are sorting a collection Media, then we need to implement it in Media class.
+
+- Q: In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+A: 
+we have to write: public class Media implements Comparable<Media> {...}
+// for cost-title sorting
+public int compareTo(Media that) {
+    // Comparing media
+    int TitleCompare = this.getTitle().compareTo(that.getTitle());
+    int CostCompare = Float.compare(this.getCost(), that.getCost());
+
+    // 2nd level comparison
+    return (CostCompare == 0) ? TitleCompare
+                                : -CostCompare;
+}
+// for title-cost sorting
+public int compare(Media that) {
+    // Comparing media
+    int TitleCompare = this.getTitle().compareTo(that.getTitle());
+    int CostCompare = Float.compare(this.getCost(), that.getCost());
+
+    // 2nd level comparison
+    return (TitleCompare == 0) ? -CostCompare // this result cannot happen since Cart doesn't allow adding MEDIAs with same titles
+                                : TitleCompare;
+}
+
+- Q: Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+A: No, since Media can only override one compareTo() method.
+
+- Q: Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+A:
+    
+	public int compareTo(Media that) {
+        // Comparing media
+        int TitleCompare = this.getTitle().compareTo(that.getTitle());
+        int CostCompare = Float.compare(this.getCost(), that.getCost());
+        if ((this instanceof DigitalVideoDisc) && (that instanceof DigitalVideoDisc)) {
+            // if the two Media are DVDs, they will have special comparison
+            int LengthCompare = this.getLength() - that.getLength();
+            if (TitleCompare != 0) {
+                return TitleCompare;
+            } else if (LengthCompare != 0) {
+                return LengthCompare;
+            } else {
+                return CostCompare;
+            }
+        }
+        // if not DVDs, they are compared in the normal way
+        return (TitleCompare == 0) ? -CostCompare // this result cannot happen since Cart doesn't allow adding MEDIAs with same titles
+                                  : TitleCompare;
+    }

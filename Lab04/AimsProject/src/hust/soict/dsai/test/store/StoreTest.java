@@ -1,6 +1,6 @@
 package hust.soict.dsai.test.store;
 
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.*;
 
 public class StoreTest {
@@ -15,18 +15,22 @@ public class StoreTest {
 		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars",
 				"Science Fiction", "George Lucas", 87, 24.95f);
 		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin",
-				"Animation", "Roger Allerts", 18.99f);
-		
+				"Animation", "Roger Allerts", 90,  18.99f);
+		Book b1 = new Book("Aladin", "Tales", 20f);
 		//here I add DVDs and test add method
- 		store.addDVD(dvd1);
-		store.addDVD(dvd2);
-		store.addDVD(dvd3);
-		store.addDVD(dvd1); //try a duplicate
+ 		store.addMedia(dvd1);
+		store.addMedia(dvd2);
+		store.addMedia(dvd3);
+		store.addMedia(b1);
+		
 		store.printStore();
 		//test remove method:
 		System.out.println("After remove");
-		store.removeDVD(dvd2);
+		store.removeMedia(dvd2);
 		store.printStore();
+		for(Media m: store.search("Aladin")) {
+			System.out.println(m);
+		}
 		
 	}
 

@@ -1,40 +1,25 @@
 package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.disc.*;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
+
+import java.util.ArrayList;
+import java.util.List;
+import hust.soict.dsai.aims.media.Media;
 
 public class Store {
-	private static final int MAX_ITEM = 1000; //limit maximum number of items = 1000
-	private DigitalVideoDisc[] itemsInStore = new DigitalVideoDisc[MAX_ITEM];
-	private int nbProduct = 0; //number of product selling
+	private List<Media> itemsInStore = new ArrayList<Media>();
 	
-	public void addDVD(DigitalVideoDisc disc) {
-		if (nbProduct == MAX_ITEM) {
-			//when reach capacity limit
-			return;
-		}
-		itemsInStore[nbProduct] = disc;
-		nbProduct+=1;
+	public boolean addMedia(Media m) {
+		if (itemsInStore.contains(m))
+			return false;
+		itemsInStore.add(m);
+		return true;
 	}
 	
-	public void removeDVD(DigitalVideoDisc disc) {
-		if (nbProduct == 0) {
-			return;
+	public boolean removeMedia(Media m) {
+		if (itemsInStore.contains(m)) {
+			itemsInStore.remove(m);
+			return true;
 		}
-		int pos = -1; 
-		for (int i = 0; i < nbProduct; i++) {
-			if (itemsInStore[i].equals(disc)) {
-				pos = i;
-				break;
-			}
-		}
-		if (pos == -1) {
-			return;
-		}
-		for (int i = pos; i < nbProduct - 1; i++) {
-			itemsInStore[i] = itemsInStore[i+1];
-		}
-		itemsInStore[nbProduct-1] = null;
-		nbProduct-=1;
+		return false;
 	}
 	
 	public void printStore() {
@@ -42,14 +27,20 @@ public class Store {
 		//only used for testing
 		System.out.println("List of items in Store: ");
 		int count = 0;
-		for (DigitalVideoDisc d: itemsInStore) {
-			if (d == null) {
-				break;
-			}
+		for (Media d: itemsInStore) {
 			count+=1;
 			System.out.print(count+". ");
 			System.out.println(d);
 		}
+	}
+	
+	public ArrayList<Media> search(String title) {
+		ArrayList<Media> m = new ArrayList<Media>();
+		for (Media d: itemsInStore) {
+			if ((d.isMatch(title))&&(!(m.contains(d))))
+				m.add(d);
+		}
+		return m;
 	}
 	
 }

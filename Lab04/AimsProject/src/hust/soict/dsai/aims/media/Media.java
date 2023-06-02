@@ -1,4 +1,5 @@
 package hust.soict.dsai.aims.media;
+import java.util.Comparator;
 
 public abstract class Media {
 	
@@ -6,6 +7,23 @@ public abstract class Media {
 	private String title;
 	private String category;
 	private float cost;
+	private static int counter = 0; // a counter variable which is auto-incremented for id 
+
+	public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+	public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
+	
+	public Media() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Media(String title, String category, float cost) {
+		super();
+		counter += 1;
+		this.id = counter;
+		this.title = title;
+		this.category = category;
+		this.cost = cost;
+	}
 	
 	public int getId() {
 		return id;
@@ -39,8 +57,20 @@ public abstract class Media {
 		this.cost = cost;
 	}
 
-	public Media() {
-		// TODO Auto-generated constructor stub
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) 
+            return false;
+        if(!(obj instanceof Media))
+            return false;
+        return (((Media) obj).title == this.title); 
 	}
-
+	
+	public boolean isMatch(int id) {
+		return (this.id == id);
+	}
+	
+	public boolean isMatch(String title) {
+		return this.getTitle().equals(title);
+	}
 }
