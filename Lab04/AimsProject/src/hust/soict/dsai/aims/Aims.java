@@ -185,13 +185,15 @@ public class Aims {
 					break;
 				case 2: // allow the user to add a media to or remove a media from the store
 				{
+					scanner.nextLine(); 
 					System.out.println("Update(u) or Remove(r) item in Store? Please choose u-r!");
 					String select = scanner.nextLine();
 					
 					if(select.compareTo("r")==0) {
-						System.out.println("Enter title of media");
+						System.out.println("Enter title of media ");
 						String title = scanner.nextLine();
-						ArrayList<Media> res = anOrder.search(title); //result of search
+		
+						ArrayList<Media> res = store.search(title); //result of search
 						if (res.size() != 0) {
 							for (Media m : res) {
 								System.out.println("result: " + m);
@@ -199,7 +201,7 @@ public class Aims {
 								while (true) {
 									int num = scanner.nextInt();
 									if (num == 1) {
-										anOrder.removeMedia(m);
+										store.removeMedia(m);
 										break;
 									} 
 									if (num == 0)
@@ -218,7 +220,7 @@ public class Aims {
 						String category = scanner.nextLine();
 						System.out.println("Cost: ");
 						float cost = scanner.nextFloat();
-						
+						scanner.nextLine();
 						System.out.println("Book or CD or DVD?");
 						System.out.println("Choose book-cd-dvd!");
 						String secl = scanner.nextLine();
@@ -246,7 +248,9 @@ public class Aims {
 							// add track
 							System.out.println("Enter information of track that is you want to add! Enter \"stop\" for stop! Enter anything(ex. more) for add more!");
 							String choose;
+							
 							do {
+								scanner.nextLine();
 								choose = scanner.nextLine();
 								if(choose.compareTo("stop")==0) continue;
 								
