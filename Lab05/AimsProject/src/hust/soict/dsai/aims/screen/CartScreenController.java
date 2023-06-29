@@ -2,13 +2,17 @@ package hust.soict.dsai.aims.screen;
 
 import java.util.Random;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.exception.AuthorNumberException;
+import hust.soict.dsai.aims.exception.DVDLengthException;
 import hust.soict.dsai.aims.exception.InputException;
 import hust.soict.dsai.aims.exception.NegativeCostException;
 import hust.soict.dsai.aims.exception.PlayerException;
+import hust.soict.dsai.aims.exception.TrackNumberException;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import hust.soict.dsai.aims.store.Store;
@@ -199,10 +203,16 @@ public class CartScreenController {
 						b.addBook();
 	        		} catch (NegativeCostException e1) {
 						e1.printStackTrace();
+						JOptionPane.showMessageDialog(new JFrame(), "ERROR: Media cost is non-positive!", "Illegal Media cost",
+								JOptionPane.ERROR_MESSAGE);
 					} catch (AuthorNumberException e2) {
 						e2.printStackTrace();
+						JOptionPane.showMessageDialog(new JFrame(), "ERROR: Number of authors is non-positive!", "Illegal Author number",
+								JOptionPane.ERROR_MESSAGE);
 					} catch (InputException e3) {
 						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), "ERROR: Wrong input!", "Illegal input",
+								JOptionPane.ERROR_MESSAGE);
 						e3.printStackTrace();
 					}
 	        		store.addMedia(b.getInput());
@@ -216,7 +226,23 @@ public class CartScreenController {
 		Runnable r = () -> SwingUtilities.invokeLater(
 	            () -> {
 	            	AddCD cd = new AddCD();
-	        		cd.addCD();
+	        		try {
+						cd.addCD();
+	        		} catch (NegativeCostException e1) {
+	        			JOptionPane.showMessageDialog(new JFrame(), "ERROR: Media cost is non-positive!", "Illegal Media cost",
+								JOptionPane.ERROR_MESSAGE);
+	        			e1.printStackTrace();
+	        		} catch (TrackNumberException e2) {
+	        			
+	        			JOptionPane.showMessageDialog(new JFrame(), "ERROR: Track number is non-positive!", "Illegal track number",
+								JOptionPane.ERROR_MESSAGE);
+	        			e2.printStackTrace();
+					} catch (InputException e3) {
+						// TODO Auto-generated catch block
+						e3.printStackTrace();
+						JOptionPane.showMessageDialog(new JFrame(), "ERROR: Wrong input!", "Illegal input",
+								JOptionPane.ERROR_MESSAGE);
+					}
 	        		store.addMedia(cd.getInput());
 	            }
 	        );
@@ -228,7 +254,22 @@ public class CartScreenController {
 		Runnable r = () -> SwingUtilities.invokeLater(
 	            () -> {
 	            	AddDVD dvd = new AddDVD();
-	        		dvd.addDVD();
+	        		try {
+						dvd.addDVD();
+	        		} catch (NegativeCostException e1) {
+	        			JOptionPane.showMessageDialog(new JFrame(), "ERROR: Media cost is non-positive!", "Illegal Media cost",
+								JOptionPane.ERROR_MESSAGE);
+	        			e1.printStackTrace();
+	        		} catch (DVDLengthException e2) {
+	        			JOptionPane.showMessageDialog(new JFrame(), "ERROR: Media length is non-positive!", "Illegal Media length",
+								JOptionPane.ERROR_MESSAGE);
+	        			e2.printStackTrace();
+					} catch (InputException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(new JFrame(), "ERROR: Wrong input!", "Illegal input",
+								JOptionPane.ERROR_MESSAGE);
+					}
 	        		store.addMedia(dvd.getInput());
 	            }
 	        );

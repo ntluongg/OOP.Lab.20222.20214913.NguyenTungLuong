@@ -4,7 +4,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import hust.soict.dsai.aims.exception.InputException;
+import hust.soict.dsai.aims.exception.NegativeCostException;
+import hust.soict.dsai.aims.exception.TrackNumberException;
 import hust.soict.dsai.aims.media.*;
 
 public class AddCD {
@@ -12,7 +14,7 @@ public class AddCD {
 	
 	public AddCD() {}
 	
-	public void addCD() {
+	public void addCD() throws InputException {
 		JPanel p = new JPanel();
 		JTextField title = new JTextField(10);
 		JTextField category = new JTextField(10);
@@ -35,14 +37,35 @@ public class AddCD {
 		p.add(n);
 		
 		JOptionPane.showConfirmDialog(null, p, "Input Media : ", JOptionPane.OK_CANCEL_OPTION);
-		cd = new CompactDisc(title.getText(), category.getText(), Float.parseFloat(cost.getText()),director.getText(), artist.getText());
+		
 
-		for (int i = 0; i < Integer.parseInt(n.getText()); i++) {
-			String m = JOptionPane.showInputDialog((i+1)+". Title", "...");
-			String m1 = JOptionPane.showInputDialog((i+1)+". length", "...");
-	        Track t = new Track(m, Integer.parseInt(m1));
-			cd.addTrack(t);
+		
+		
+		try {
+			float inp_cost =  Float.parseFloat(cost.getText());
+			if (inp_cost >= 0) {
+				int inp_n = Integer.parseInt(n.getText());
+				cd = new CompactDisc(title.getText(), category.getText(), inp_cost, director.getText(), artist.getText());
+				
+				if (inp_n > 0) {
+					for (int i = 0; i < inp_n; i++) {
+						String m = JOptionPane.showInputDialog((i+1)+". Title", "...");
+						String m1 = JOptionPane.showInputDialog((i+1)+". length", "...");
+				        Track t = new Track(m, Integer.parseInt(m1));
+						cd.addTrack(t);
+					}
+				} else {
+					throw new TrackNumberException();
+				}
+			} else {
+				throw new NegativeCostException();
+			}
+		} catch (NumberFormatException exp) {
+			throw new InputException();
+		} catch (NullPointerException exp) {
+			throw new InputException();
 		}
+		
 	}
 	
 	public CompactDisc getInput() {

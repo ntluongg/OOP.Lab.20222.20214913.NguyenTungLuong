@@ -4,7 +4,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import hust.soict.dsai.aims.exception.DVDLengthException;
+import hust.soict.dsai.aims.exception.InputException;
+import hust.soict.dsai.aims.exception.NegativeCostException;
 import hust.soict.dsai.aims.media.*;
 
 public class AddDVD {
@@ -12,7 +14,7 @@ public class AddDVD {
 	
 	public AddDVD() {}
 	
-	public void addDVD() {
+	public void addDVD() throws InputException {
 		JPanel p = new JPanel();
 		JTextField title = new JTextField(10);
 		JTextField category = new JTextField(10);
@@ -32,7 +34,26 @@ public class AddDVD {
 		p.add(length);
 		
 		JOptionPane.showConfirmDialog(null, p, "Input Media : ", JOptionPane.OK_CANCEL_OPTION);
-		dvd = new DigitalVideoDisc(title.getText(), category.getText(), director.getText(), Integer.parseInt(length.getText()), Float.parseFloat(cost.getText()));
+		
+		
+		try {
+			float inp_cost =  Float.parseFloat(cost.getText());
+			if (inp_cost >= 0) {
+				int inp_length = Integer.parseInt(length.getText());
+				
+				if (inp_length >= 0) {
+					dvd = new DigitalVideoDisc(title.getText(), category.getText(), director.getText(), Integer.parseInt(length.getText()), Float.parseFloat(cost.getText()));
+				} else {
+					throw new DVDLengthException();
+				}
+			} else {
+				throw new NegativeCostException();
+			}
+		} catch (NumberFormatException exp) {
+			throw new InputException();
+		} catch (NullPointerException exp) {
+			throw new InputException();
+		}
 	}
 	
 	public DigitalVideoDisc getInput() {

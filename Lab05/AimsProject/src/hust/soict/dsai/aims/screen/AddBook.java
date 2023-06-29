@@ -54,8 +54,9 @@ public class AddBook {
 			}
 		} catch (NumberFormatException exp) {
 			throw new InputException();
+		} catch (NullPointerException exp) {
+			throw new InputException();
 		}
-		
 		
 	}
 	
