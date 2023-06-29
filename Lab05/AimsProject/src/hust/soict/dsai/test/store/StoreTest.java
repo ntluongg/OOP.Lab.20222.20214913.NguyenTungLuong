@@ -1,7 +1,10 @@
 package hust.soict.dsai.test.store;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.*;
-import hust.soict.dsai.aims.screen.StoreScreen;
 import hust.soict.dsai.aims.store.*;
 
 public class StoreTest {
@@ -14,7 +17,7 @@ public class StoreTest {
 		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
 				"Animation", "Roger Allers", 87, 19.95f);
 		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars",
-				"Science Fiction", "George Lucas", 87, 24.95f);
+				"Science Fiction", "George Lucas", -87, 24.95f);
 		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin",
 				"Animation", "Roger Allerts", 90,  18.99f);
 		Book b1 = new Book("Aladin", "Tales", 20f);
@@ -25,12 +28,15 @@ public class StoreTest {
 		store.addMedia(b1);
 		
 		store.printStore();
-		//test remove method:
-		System.out.println("After remove");
-		store.removeMedia(dvd2);
-		
-		new StoreScreen(store);
-		
+		try {
+			dvd2.play();
+		} catch (PlayerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JFrame(), "ERROR: DVD length is non-positive!", "Illegal DVD length",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		System.out.println("done");
 	}
 
 }

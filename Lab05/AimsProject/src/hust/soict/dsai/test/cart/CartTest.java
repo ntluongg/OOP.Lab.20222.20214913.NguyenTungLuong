@@ -26,10 +26,11 @@ public class CartTest {
 		Book b1 = new Book("Aladin Book",
 				"Animation", 18.99f);
 		cart.addMedia(b1);
+		cart.sortByCostTitle();
 		//Test the print method
 		cart.print();
+		cart.sortByCostTitle();
+		cart.print();
 		//Test the search methods
-		new CartScreen(cart);
-		
 	}
 }

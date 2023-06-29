@@ -56,6 +56,8 @@ public class Cart {
 		System.out.println("Total cost: "+totalCost());
 		System.out.println("***************************************************");
 	}
+	
+	
 /*
 	public ArrayList<Media> search(int id) {
 		ArrayList<Media> res = new ArrayList<Media>();

@@ -1,6 +1,7 @@
 package hust.soict.dsai.aims;
 
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.store.*;
 import hust.soict.dsai.aims.media.*;
 import java.util.Scanner;
@@ -114,7 +115,12 @@ public class Aims {
 													anOrder.addMedia(res);
 												}
 												if (inp1 == 2) {
-													((Disc) res).play();
+													try {
+														((Disc) res).play();
+													} catch (PlayerException e) {
+														// TODO Auto-generated catch block
+														e.printStackTrace();
+													}
 												}
 												if (inp1 == 0)
 													break;
@@ -168,7 +174,12 @@ public class Aims {
 									for (Media res: r) {
 										System.out.println("playing: " + res);
 										if (res instanceof Disc) {				
-											((Disc) res).play();	
+											try {
+												((Disc) res).play();
+											} catch (PlayerException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}	
 										} else if (res instanceof Book)
 											System.out.println("Cannot play book");									
 									}
@@ -292,13 +303,13 @@ public class Aims {
 								String inp = scanner.nextLine();
 								if (inp.equals("Y")) {
 									int inp_id = scanner.nextInt(); 
-									for(Media m: anOrder.search(inp_id))
-										System.out.println(m);
+									//for(Media m: anOrder.search(inp_id))
+										//System.out.println(m);
 									
 								} else {
 									String inp_str = scanner.nextLine();
-									for(Media m: anOrder.search(inp_str))
-										System.out.println(m);
+									//for(Media m: anOrder.search(inp_str))
+										//System.out.println(m);
 								}
 								break;
 							case 2:
@@ -312,7 +323,7 @@ public class Aims {
 								}
 								anOrder.print();
 								break;
-							case 3:
+							/*case 3:
 								scanner.nextLine();
 								System.out.println("Please enter Media title: ");
 								inp = scanner.nextLine();
@@ -334,7 +345,7 @@ public class Aims {
 									
 								} else 
 									System.out.println("No result!");
-								break;
+								break; 
 							case 4:
 								scanner.nextLine();
 								System.out.println("Please enter Media title: ");
@@ -353,11 +364,11 @@ public class Aims {
 							case 5:
 								System.out.println("Placed Order successfully");
 								anOrder = new Cart();
-								break;
-						}
+								break; */
+						} 
 					}
-					break;
-			}
+					break; 
+			} 
 			if (option == 0) 
 				break;
 		}
